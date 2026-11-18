@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Warm Culinary Charcoal & Spiced Ember Palette (GDK + CAVA Soul, Apple Discipline) */
+    --color-charcoal: #110c09;
+    --color-hearth: #1a120d;
+    --color-ember: #ea580c;
+    --color-saffron: #f59e0b;
+    --color-toum: #faf6f0;
+    --color-tahini: #d4a373;
+    --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  body {
+    background-color: var(--color-charcoal);
+    color: var(--color-toum);
+    font-family: var(--font-display);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .font-serif-luxury {
+    font-family: var(--font-serif);
+  }
+
+  ::selection {
+    background-color: rgba(245, 158, 11, 0.35);
+    color: #ffffff;
+  }
+}
+
+/* ============================================================================
+   WARM CULINARY FROSTED GLASS TYPOGRAPHY & SURFACES
+   Crisp optical legibility, zero blurry neon smog, warm ember light balance.
+   ============================================================================ */
+
+@keyframes glass-light-sweep {
+  0% {
+    background-position: -180% 0%;
+  }
+  100% {
+    background-position: 220% 0%;
+  }
+}
+
+.glass-text {
+  font-family: var(--font-display);
+  background: linear-gradient(
+    180deg,
+    #fffdf9 0%,
+    rgba(255, 250, 240, 0.94) 58%,
+    rgba(245, 228, 200, 0.65) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.glass-text-amber {
+  font-family: var(--font-display);
+  background: linear-gradient(
+    180deg,
+    #fffbeb 0%,
+    #fbbf24 52%,
+    #ea580c 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.glass-sheen-layer {
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0) 44%,
+    rgba(255, 248, 230, 0.32) 50%,
+    rgba(255, 255, 255, 0) 56%,
+    transparent 70%
+  );
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: glass-light-sweep 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-sheen-layer {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* Warm Smoked-Glass Surface (CAVA warmth + Apple Liquid Glass craft) */
+.glass-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 244, 230, 0.08) 0%,
+    rgba(30, 20, 14, 0.55) 60%,
+    rgba(255, 235, 205, 0.05) 100%
+  );
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid rgba(255, 235, 205, 0.14);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 245, 230, 0.22),
+    0 20px 56px rgba(0, 0, 0, 0.55);
+}
