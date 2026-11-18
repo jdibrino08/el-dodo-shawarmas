@@ -47,10 +47,10 @@ export function HeroFlyThrough() {
 
               <h1 className="text-5xl sm:text-7xl lg:text-[5.25rem] font-extrabold tracking-[-0.03em] leading-[0.96] uppercase">
                 <GlassText variant="crystal" className="block">
-                  SHAWARMAS
+                  AUTÉNTICO
                 </GlassText>
                 <GlassText variant="amber" className="block mt-1">
-                  HECHOS AL FUEGO.
+                  SHAWARMA AL TROMPO.
                 </GlassText>
               </h1>
 
