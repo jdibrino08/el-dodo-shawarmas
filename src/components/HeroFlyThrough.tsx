@@ -11,13 +11,8 @@ import {
 } from 'lucide-react'
 import { GlassText } from './GlassText'
 import { BRAND_INFO } from '../data/brandConfig'
-import { formatRateDisplay } from '../hooks/useBcvRate'
 
-interface HeroFlyThroughProps {
-  bcvRate: number | null
-}
-
-export function HeroFlyThrough({ bcvRate }: HeroFlyThroughProps) {
+export function HeroFlyThrough() {
   return (
     <section id="inicio" className="relative bg-[#110c09]">
       {/* Tight, High-Conversion Full-Bleed Culinary Hero (1 natural scroll to menu on 4G mobile!) */}
@@ -103,11 +98,6 @@ export function HeroFlyThrough({ bcvRate }: HeroFlyThroughProps) {
                 <p className="text-xs font-mono text-amber-100/80 mt-1.5">
                   Ticket {BRAND_INFO.priceRange} · Pago Móvil / Efectivo / Zelle
                 </p>
-                {bcvRate && (
-                  <p className="text-[11px] font-mono text-emerald-300 mt-1">
-                    BCV Hoy: {formatRateDisplay(bcvRate)} / $
-                  </p>
-                )}
               </a>
             </div>
           </div>

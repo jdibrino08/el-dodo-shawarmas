@@ -67,7 +67,7 @@ export function App() {
         />
 
         <main>
-          <HeroFlyThrough bcvRate={bcv.rate} />
+          <HeroFlyThrough />
           <MenuSection
             onSelectShawarma={(item) => setSelectedItem(item)}
             onQuickAdd={handleQuickAdd}

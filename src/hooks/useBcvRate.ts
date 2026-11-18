@@ -67,7 +67,7 @@ async function fetchLiveBcvRate(): Promise<{ rate: number; updatedAt: string; so
       return {
         rate: data.promedio,
         updatedAt: data.fechaActualizacion || new Date().toISOString(),
-        source: 'BCV Oficial (DolarApi)',
+        source: 'BCV',
       }
     }
   } catch {

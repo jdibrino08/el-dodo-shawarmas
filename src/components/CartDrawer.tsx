@@ -391,21 +391,27 @@ export function CartDrawer({
                     </div>
 
                     {grandTotalVes && (
-                      <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-400/25">
-                        <div className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-200">
-                          <span>Total Bs. ({formatRateDisplay(bcv.rate)})</span>
+                      <div className="flex items-center justify-between pt-1 text-[11px] font-mono text-neutral-400">
+                        <div className="flex items-center gap-1.5">
+                          <span>Ref. BCV ({formatRateDisplay(bcv.rate)})</span>
                           <button
                             onClick={() => void bcv.refresh()}
                             disabled={bcv.isRefreshing}
                             aria-label="Actualizar tasa BCV"
-                            className="text-emerald-300 hover:text-white disabled:opacity-50"
+                            className="text-neutral-500 hover:text-amber-300 disabled:opacity-50"
                           >
                             <RefreshCw
                               className={`w-3 h-3 ${bcv.isRefreshing ? 'animate-spin' : ''}`}
                             />
                           </button>
                         </div>
-                        <span className="font-mono text-sm font-extrabold text-emerald-300">
+                        <span
+                          className={
+                            paymentMethod === 'pago-movil'
+                              ? 'text-amber-200 font-bold text-xs'
+                              : 'text-neutral-300'
+                          }
+                        >
                           {grandTotalVes}
                         </span>
                       </div>
