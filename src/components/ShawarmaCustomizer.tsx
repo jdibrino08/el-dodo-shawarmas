@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
+import { useLenis } from 'lenis/react'
 import { X, Check, Flame, Plus, Minus } from 'lucide-react'
 import type { MenuItem } from '../data/menuData'
 import { formatVes } from '../hooks/useBcvRate'
@@ -36,14 +37,19 @@ function ShawarmaCustomizerDialog({
   const [spiceLevel, setSpiceLevel] = useState<number>(item.spicyLevel)
   const [selectedExtras, setSelectedExtras] = useState<string[]>([])
   const [quantity, setQuantity] = useState<number>(1)
+  const lenis = useLenis()
 
   useEffect(() => {
+    lenis?.stop()
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [onClose])
+    return () => {
+      lenis?.start()
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [onClose, lenis])
 
   const toggleExtra = (id: string) => {
     setSelectedExtras((prev) =>
@@ -99,10 +105,11 @@ function ShawarmaCustomizerDialog({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.96, y: 18 }}
         transition={{ duration: 0.2 }}
-        className="relative w-full max-w-2xl bg-[#1a120d] border border-amber-100/15 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] overflow-hidden z-10 my-8"
+        data-lenis-prevent
+        className="relative w-full max-w-2xl max-h-[90vh] flex flex-col bg-[#1a120d] border border-amber-100/15 rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] overflow-hidden z-10 my-4"
       >
         {/* Header Image */}
-        <div className="relative h-48 sm:h-52 w-full overflow-hidden">
+        <div className="relative h-44 sm:h-52 w-full overflow-hidden shrink-0">
           <img
             src={item.image}
             alt={item.name}
@@ -126,7 +133,10 @@ function ShawarmaCustomizerDialog({
           </div>
         </div>
 
-        <div className="p-6 sm:p-7 space-y-6 max-h-[58vh] overflow-y-auto">
+        <div
+          data-lenis-prevent
+          className="p-6 sm:p-7 space-y-6 flex-1 min-h-0 overflow-y-auto overscroll-contain touch-pan-y"
+        >
           {/* Step 1: Base */}
           <div>
             <p className="text-xs font-mono font-bold uppercase tracking-wider text-amber-300/90 mb-3">

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
+import { useLenis } from 'lenis/react'
 import {
   X,
   Trash2,
@@ -61,6 +62,18 @@ export function CartDrawer({
   const [carNote, setCarNote] = useState<string>('')
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('pago-movil')
   const [cashBill, setCashBill] = useState<string>('Pago exacto')
+  const lenis = useLenis()
+
+  useEffect(() => {
+    if (isOpen) {
+      lenis?.stop()
+    } else {
+      lenis?.start()
+    }
+    return () => {
+      lenis?.start()
+    }
+  }, [isOpen, lenis])
 
   useEffect(() => {
     if (!isOpen) return
@@ -165,10 +178,11 @@ export function CartDrawer({
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 26, stiffness: 220 }}
-              className="w-screen max-w-md bg-[#16100c] border-l border-amber-100/12 shadow-2xl flex flex-col justify-between"
+              data-lenis-prevent
+              className="w-screen max-w-md h-full bg-[#16100c] border-l border-amber-100/12 shadow-2xl flex flex-col justify-between"
             >
               {/* Header */}
-              <div className="p-5 border-b border-amber-100/10 flex items-center justify-between">
+              <div className="p-5 border-b border-amber-100/10 flex items-center justify-between shrink-0">
                 <div className="flex items-center gap-2.5">
                   <ShoppingBag className="w-5 h-5 text-amber-400" />
                   <h3 id="cart-drawer-title" className="text-lg font-extrabold text-white">
@@ -184,8 +198,11 @@ export function CartDrawer({
                 </button>
               </div>
 
-              {/* Scrollable Body */}
-              <div className="p-5 overflow-y-auto flex-1 space-y-5">
+              {/* Scrollable Body (Native wheel/trackpad/touch unlocked from Lenis) */}
+              <div
+                data-lenis-prevent
+                className="p-5 overflow-y-auto overscroll-contain touch-pan-y flex-1 min-h-0 space-y-5"
+              >
                 {items.length === 0 ? (
                   <div className="py-16 text-center space-y-4">
                     <div className="w-16 h-16 rounded-2xl bg-white/[0.04] border border-amber-100/15 flex items-center justify-center mx-auto">
@@ -365,7 +382,7 @@ export function CartDrawer({
 
               {/* Checkout Footer */}
               {items.length > 0 && (
-                <div className="p-5 bg-[#110c09] border-t border-amber-100/12 space-y-4">
+                <div className="p-5 bg-[#110c09] border-t border-amber-100/12 space-y-4 shrink-0">
                   <div className="space-y-1.5 text-xs">
                     <div className="flex justify-between text-neutral-400">
                       <span>Subtotal</span>
